@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'knox',
-    'corsheaders',
-    # 'rest_framework.authtoken',
+   "corsheaders",
     'dagracemarketapp',
+    'users'
     
 ]
 
@@ -59,6 +59,8 @@ MIDDLEWARE = [
 ]
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8080',
+    "http://127.0.0.1:8000"
+    
     
 
 )
@@ -144,20 +146,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
-
-    
-# }
-
- 
- 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        #  'knox.auth.TokenAuthentication',
-    ]
+    
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
 
     
 }
+
+ 
+ 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.BasicAuthentication',
+#         # 'rest_framework.authentication.SessionAuthentication',
+#         'knox.auth.TokenAuthentication',
+#     ]
+
+    
+# }
