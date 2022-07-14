@@ -4,15 +4,12 @@ from rest_framework import viewsets, status
 from django.shortcuts import get_object_or_404
 from . serializers import productSerializers, CategorySerializers, SlideimgSerializers
 from knox.models import AuthToken
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
+from .serializers import UserSerializer, RegisterSerializer
 from django.contrib.auth import login
 from rest_framework import permissions, generics
-from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView 
 
 from .models import Product, Slideimg, Category
-# from rest_framework.permissions import IsAuthenticated
-# from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated, AllowAny,  BasePermission
 # Create your views here.
 
@@ -33,22 +30,17 @@ class ProductUserWritePermission(BasePermission):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     serializer_class = CategorySerializers
 
 
 class ProductList(generics.ListCreateAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = productSerializers
 
-    # def post(self, request):
-    #     serializer = productSerializers(data= request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
             
 
@@ -57,17 +49,8 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView, ProductUserWritePermi
     queryset = Product.objects.all()
     serializer_class = productSerializers
 
-# class ProductVeiw(viewsets.ModelViewSet):
-    # queryset = Product.objects.all()
-    # permission_classes = [IsAuthenticated]  
-    # serializer_class = productSerializers
 
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     return Product.objects.filter(owner=user)
 
-    
-    # authentication_classes = (TokenAuthentication )
 
 
 class SliderViewSet(viewsets.ModelViewSet):
@@ -94,20 +77,31 @@ class RegisterAPI(generics.GenericAPIView):
 
 
 
-class login(generics.GenericAPIView):
-    permission_classes = [AllowAny]
+
+
+
+
+
+
+
+
+
+# this code as been move to another app users app
+
+# class login(generics.GenericAPIView):
+#     permission_classes = [AllowAny]
   
-    serializer_class = LoginSerializer
+#     serializer_class = LoginSerializer
 
-    def post(self, request):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        return Response({
+#     def post(self, request):
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         user = serializer.validated_data
+#         return Response({
 
-            "user":UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
-        })
+#             "user":UserSerializer(user, context=self.get_serializer_context()).data,
+#             "token": AuthToken.objects.create(user)[1]
+#         })
         
 
 

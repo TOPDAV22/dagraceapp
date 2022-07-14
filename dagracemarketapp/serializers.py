@@ -12,9 +12,7 @@ class productSerializers(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
         read_only_fields =['user']
-    # def validate(self, attrs):
-    #     attrs['user'] = self.context['request'].user
-    #     return attrs
+
 
 class CategorySerializers(serializers.ModelSerializer):
     class Meta:
@@ -27,7 +25,7 @@ class SlideimgSerializers(serializers.ModelSerializer):
         model = Slideimg
         fields = '__all__'
 
-# from studygy
+
 
 
 # User Serializer
@@ -52,15 +50,23 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return user
 
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField()
 
-    def validate(self, data):
-        user = authenticate(**data)
-        if user and user.is_active:
-            return user
-            raise serializers.ValidationError('incorrent credential passed.')
+
+
+
+
+
+        # done on userApp
+
+# class LoginSerializer(serializers.Serializer):
+#     username = serializers.CharField()
+#     password = serializers.CharField()
+
+#     def validate(self, data):
+#         user = authenticate(**data)
+#         if user and user.is_active:
+#             return user
+#             raise serializers.ValidationError('incorrent credential passed.')
 
 
 # Register Serializer
