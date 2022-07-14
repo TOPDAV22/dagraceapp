@@ -12,9 +12,9 @@ class productSerializers(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
         read_only_fields =['user']
-    def validate(self, attrs):
-        attrs['user'] = self.context['request'].user
-        return attrs
+    # def validate(self, attrs):
+    #     attrs['user'] = self.context['request'].user
+    #     return attrs
 
 class CategorySerializers(serializers.ModelSerializer):
     class Meta:

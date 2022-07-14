@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import ProductVeiw 
+# from .views import ProductVeiw 
 from .views import SliderViewSet, CategoryViewSet
 from rest_framework.routers import DefaultRouter
 
@@ -9,6 +9,7 @@ from .views import RegisterAPI, login
 from knox import views as knox_views
 
 from django.urls import path
+from .views import ProductList,ProductDetail
 
 
    
@@ -17,7 +18,7 @@ from django.urls import path
 router = DefaultRouter()
 router.register('category', CategoryViewSet),
 router.register('slideimg', SliderViewSet),
-router.register('product', ProductVeiw, basename = 'product'), 
+     
 
 
 
@@ -28,6 +29,9 @@ router.register('product', ProductVeiw, basename = 'product'),
 
 urlpatterns =[
     path('api/', include(router.urls)),
+    path('product/', ProductList.as_view(), name='productList'),
+   path('product/<int:pk>/', ProductDetail.as_view(), name='ProductDetail'),
+    
    
 
 ] 

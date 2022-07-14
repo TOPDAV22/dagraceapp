@@ -47,8 +47,9 @@ class Product(models.Model):
     facebook_userName = models.CharField(max_length=200, null=True, blank=True)
     whatsapp_number = models.IntegerField( null=True, blank=True )
     date_posted = models.DateTimeField(auto_now_add=True, blank= True)
-    owner = models.ForeignKey(User, related_name='Article', null= True, on_delete=CASCADE)
-    def __str__(self):
-        
-        return self.product_Name
+    owner = models.ForeignKey(User, related_name='owner', null= True, on_delete=CASCADE)
+
+
+    def __str__(self) -> str:
+        return f'owner: {self.owner} product_Name: {self.product_Name}'
     
